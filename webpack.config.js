@@ -25,14 +25,6 @@ module.exports = {
                 query: {
                     presets: 'es2015'
                 }
-            },
-            {
-                test: /\.scss$/,
-                loader: 'style-loader!css-loader!autoprefixer-loader!sass-loader'
-            },
-            {
-                test: /\.woff|\.woff2|\.svg|.eot|\.png|\.jpg|\.ttf/,
-                loader: 'url-loader?prefix=font/&limit=10000'
             }
         ]
     },
