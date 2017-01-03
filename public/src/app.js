@@ -38,6 +38,7 @@ function resetDrops() {
     drops.forEach((drop) => {
         drop.style.top = '-5%';
     });
+    stop.style.opacity = '1';
 }
 
 for (var i = 0; i < count; i++) {
@@ -64,4 +65,5 @@ start[1].addEventListener('click', () => {
 stop.addEventListener('click', () => {
     Velocity(drops, 'stop');
     body.classList.add('pause');
+    stop.style.opacity = '0';
 });
