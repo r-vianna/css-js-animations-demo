@@ -17,7 +17,7 @@ start = Math.random() < 0.5 ? start : start.reverse();
 function createDrop() {
     const rain = document.createElement('div');
     const rainType = Math.random() < 0.2 ? 'rain' : 'rain-small';
-    const delay = Math.random() * 5000;
+    const delay = Math.round(Math.random() * 5000);
 
     rain.customAnimation = () => {
         Velocity(rain, {
