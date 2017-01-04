@@ -20,15 +20,20 @@ function createDrop() {
     const delay = Math.random() * 5000;
 
     rain.customAnimation = () => {
-        Velocity(rain, { top: ['105%', '-5%'] }, {
+        Velocity(rain, {
+            top: ['130%', '-5%'],
+            translateZ: ['-200px', '0']
+        },
+        {
             easing: 'linear',
-            duration: 5000,
             delay: delay,
+            duration: 5000,
             complete: rain.customAnimation
         });
+        console.log(delay);
     }
     rain.classList.add(rainType);
-    rain.style.left = (Math.random() * 101) + '%';
+    rain.style.left = (Math.random() * 100 ) + ((Math.random() * 30) * (Math.random() < 0.5 ? -1  : 1)) + '%';
     rain.style.animationDelay = delay + 'ms';
     body.appendChild(rain);
     drops.push(rain);
@@ -47,6 +52,7 @@ for (var i = 0; i < count; i++) {
 
 start[0].addEventListener('click', () => {
     body.classList.remove('animate'); // stop css animation
+    Velocity(drops, 'stop'); // stop js animation incase of double click
     resetDrops(); // reset all the drop tops to -5%
     drops.forEach((drop) => {
         drop.customAnimation();

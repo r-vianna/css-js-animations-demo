@@ -4,6 +4,7 @@ body, html {
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
     background-color: ivory;
+    perspective: 600px;
 }
 
 footer {
@@ -139,6 +140,6 @@ footer button {
 }
 
 @keyframes raining {
-    0% { top: -5% ; }
-    100% { top: 105%; }
+    0% { top: -5%; transform: translate3d(0,0,0); }
+    100% { top: 130%; transform: translate3d(0,0,-200px); }
 }
