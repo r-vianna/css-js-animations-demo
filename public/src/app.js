@@ -28,10 +28,11 @@ function createDrop() {
             easing: 'linear',
             delay: delay,
             duration: 5000,
-            complete: rain.customAnimation
+            complete: rain.customAnimation,
+            queue: 'rain'
         });
-        console.log(delay);
     }
+
     rain.classList.add(rainType);
     rain.style.left = (Math.random() * 100 ) + ((Math.random() * 30) * (Math.random() < 0.5 ? -1  : 1)) + '%';
     rain.style.animationDelay = delay + 'ms';
@@ -42,8 +43,10 @@ function createDrop() {
 function resetDrops() {
     drops.forEach((drop) => {
         drop.style.top = '-5%';
+        drop.style.transform = "translateZ(0)";
     });
     stop.style.opacity = '1';
+    start.forEach((btn) => { btn.disabled = true; });
 }
 
 for (var i = 0; i < count; i++) {
@@ -52,16 +55,16 @@ for (var i = 0; i < count; i++) {
 
 start[0].addEventListener('click', () => {
     body.classList.remove('animate'); // stop css animation
-    Velocity(drops, 'stop'); // stop js animation incase of double click
     resetDrops(); // reset all the drop tops to -5%
     drops.forEach((drop) => {
         drop.customAnimation();
     });
+    Velocity.Utilities.dequeue(drops, 'rain');
     console.log('JS Animation')
 });
 
 start[1].addEventListener('click', () => {
-    Velocity(drops, 'stop'); // stop js animation
+    Velocity(drops, 'stop', true); // stop js animation
     resetDrops(); // reset all the drop tops to -5%
     body.classList.add('animate');
     body.classList.remove('pause');
@@ -69,7 +72,8 @@ start[1].addEventListener('click', () => {
 });
 
 stop.addEventListener('click', () => {
-    Velocity(drops, 'stop');
+    Velocity(drops, 'stop', true);
     body.classList.add('pause');
     stop.style.opacity = '0';
+    start.forEach((btn) => { btn.disabled = false; });
 });
