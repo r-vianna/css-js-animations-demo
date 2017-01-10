@@ -141,6 +141,6 @@ footer button {
 }
 
 @keyframes raining {
-    0% { top: -5%; transform: translate3d(0,0,0); }
-    100% { top: 130%; transform: translate3d(0,0,-200px); }
+    0% { transform: translate3d(0,0,0); }
+    100% { transform: translate3d(0,130vh,-200px); }
 }

@@ -21,7 +21,7 @@ function createDrop() {
 
     rain.customAnimation = () => {
         Velocity(rain, {
-            top: ['130%', '-5%'],
+            translateY: ['130vh', '0'],
             translateZ: ['-200px', '0']
         },
         {
@@ -40,10 +40,9 @@ function createDrop() {
     drops.push(rain);
 }
 
-function resetDrops() {
+function reset() {
     drops.forEach((drop) => {
-        drop.style.top = '-5%';
-        drop.style.transform = "translateZ(0)";
+        drop.style.transform = "translate3d(0,0,0)";
     });
     stop.style.opacity = '1';
     start.forEach((btn) => { btn.disabled = true; });
@@ -55,7 +54,7 @@ for (var i = 0; i < count; i++) {
 
 start[0].addEventListener('click', () => {
     body.classList.remove('animate'); // stop css animation
-    resetDrops(); // reset all the drop tops to -5%
+    reset(); // reset all the drop tops to -5%
     drops.forEach((drop) => {
         drop.customAnimation();
     });
@@ -64,8 +63,7 @@ start[0].addEventListener('click', () => {
 });
 
 start[1].addEventListener('click', () => {
-    Velocity(drops, 'stop', true); // stop js animation
-    resetDrops(); // reset all the drop tops to -5%
+    reset(); // reset all the drop tops to -5%
     body.classList.add('animate');
     body.classList.remove('pause');
     console.log('CSS Animation')
